@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#27ae60">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Rota Verde">
+    <title>Rota Verde Cajamar | Conecte, Compartilhe e Recicle</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <header>
+        <div class="logo">♻️ Rota Verde Cajamar: Conecte, Compartilhe e Recicle</div>
+        <nav>
+            <a href="#mapa">Mapa</a>
+            <a href="#locais">Pontos</a>
+            <a href="#coleta">Solicitar Coleta</a>
+            <a href="#educativo">Educação</a>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <h1>Conecte, Compartilhe e Recicle Sua Comunidade</h1>
+        <p>Cajamar/SP — Juntos por uma cidade mais sustentável</p>
+    </section>
+
+    <section id="mapa" class="secao">
+        <h2>📍 Mapa de Pontos de Reciclagem</h2>
+        <div id="mapa-recicla"></div>
+    </section>
+
+    <section id="locais" class="secao fundo-claro">
+        <h2>📋 Pontos de Coleta em Cajamar</h2>
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Local</th>
+                        <th>Endereço</th>
+                        <th>Material</th>
+                        <th>Horário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>EMEB Odir da Silva Araújo</td>
+                        <td>Rua Teodoro Sampaio, 411 — Jd. Adelaide</td>
+                        <td>Óleo de Cozinha</td>
+                        <td>7h às 17h</td>
+                    </tr>
+                    <tr>
+                        <td>EMEB Vinícius de Silva</td>
+                        <td>Rua das Cisalpinas, 250</td>
+                        <td>Óleo de Cozinha</td>
+                        <td>7h às 17h</td>
+                    </tr>
+                    <tr>
+                        <td>EMEB Victor H. Costa Possebon</td>
+                        <td>Rua Benedita Leme da Silva</td>
+                        <td>Óleo de Cozinha</td>
+                        <td>8h às 16h</td>
+                    </tr>
+                    <tr>
+                        <td>Paço Municipal</td>
+                        <td>Praça José Rodrigues do Nascimento</td>
+                        <td>Papelão, Sacolas</td>
+                        <td>8h às 15h</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="coleta" class="secao">
+        <h2>🤝 Solicitar Coleta Voluntária</h2>
+        <form id="form-coleta">
+            <label>Seu nome:</label>
+            <input type="text" id="nome" required>
+
+            <label>Seu bairro:</label>
+            <input type="text" id="bairro" required>
+
+            <label>Tipo de material:</label>
+            <select id="material">
+                <option>Papel e Papelão</option>
+                <option>Plástico</option>
+                <option>Vidro</option>
+                <option>Metal</option>
+                <option>Óleo de cozinha</option>
+                <option>Mistura de materiais</option>
+            </select>
+
+            <label>Quantidade aproximada:</label>
+            <input type="text" id="quantidade" placeholder="Ex: 2 sacolas, 1 garrafa" required>
+
+            <label>Melhor horário para contato:</label>
+            <input type="time" id="horario">
+
+            <button type="submit" class="btn">Solicitar Coleta ✅</button>
+        </form>
+        <div id="mensagem-sucesso" class="oculto">
+            Solicitação enviada!
+        </div>
+    </section>
+
+    <section id="educativo" class="secao fundo-claro">
+        <h2>📚 Educação Ambiental</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>🔵 Plástico</h3>
+                <p>Garrafas, embalagens, potes. Lave bem antes de descartar. Tampas podem ficar presas.</p>
+            </div>
+            <div class="card">
+                <h3>🟡 Metal</h3>
+                <p>Latas de refrigerante, tampinhas, pregos. Separe por tipo quando possível.</p>
+            </div>
+            <div class="card">
+                <h3>🟢 Vidro</h3>
+                <p>Garrafas, potes, frascos. Quebrado? Embale em papel e identifique.</p>
+            </div>
+            <div class="card">
+                <h3>🟤 Papel</h3>
+                <p>Caixas, jornais, folhas. Evite misturar com plástico ou fita adesiva.</p>
+            </div>
+            <div class="card">
+                <h3>🛢️ Óleo</h3>
+                <p>Nunca jogue no ralo! Guarde em garrafa PET e leve aos pontos de coleta. 1 litro contamina 25 mil litros de água.</p>
+            </div>
+            <div class="card">
+                <h3>🚫 Não reciclável</h3>
+                <p>Esponja, papel higiênico, adesivos, cerâmica, isopor, fraldas. Vai para o lixo comum.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>♻️ Rota Verde Cajamar</p>
+        
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
