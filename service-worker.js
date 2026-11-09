@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rota-verde-cajamar-v1';
+const CACHE_NAME = 'rota-verde-v2';
 const ASSETS = [
   './',
   './index.html',

@@ -1,7 +1,7 @@
 {
-  "name": "Rota Verde Cajamar",
+  "name": "Rota Verde",
   "short_name": "Rota Verde",
-  "description": "Mapa e informações sobre reciclagem em Cajamar",
+  "description": "Mapa e informações sobre reciclagem",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

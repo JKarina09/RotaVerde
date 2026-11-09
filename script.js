@@ -1,4 +1,4 @@
-// Inicializar mapa — coordenadas de Cajamar/SP
+// Inicializar mapa — coordenadas do município
 const mapa = L.map('mapa-recicla').setView([-23.35, -46.88], 13);
 
 // Adicionar camada pública de ruas do Esri (sem chave de API)
