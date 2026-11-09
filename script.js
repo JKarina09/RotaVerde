@@ -58,12 +58,56 @@ pontos.forEach(p => {
 // Formulário de solicitação de coleta
 const form = document.getElementById('form-coleta');
 const mensagem = document.getElementById('mensagem-sucesso');
+const mensagemErro = document.getElementById('mensagem-erro');
+const botaoEnviar = form.querySelector('button[type="submit"]');
+const configSupabase = window.SUPABASE_CONFIG;
+const configuracaoValida = configSupabase
+    && /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(configSupabase.url)
+    && /^sb_publishable_[A-Za-z0-9_-]+$/.test(configSupabase.publishableKey);
+const clienteSupabase = configuracaoValida && window.supabase
+    ? window.supabase.createClient(configSupabase.url, configSupabase.publishableKey)
+    : null;
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
-    form.style.display = 'none';
-    mensagem.classList.remove('oculto');
+
+    mensagemErro.classList.add('oculto');
+    mensagemErro.textContent = '';
+
+    if (!clienteSupabase) {
+        mensagemErro.textContent = 'O envio ainda não está configurado. Configure o projeto Supabase antes de testar.';
+        mensagemErro.classList.remove('oculto');
+        return;
+    }
+
+    botaoEnviar.disabled = true;
+
+    try {
+        const { error } = await clienteSupabase
+            .from('solicitacoes_coleta')
+            .insert({
+                nome: document.getElementById('nome').value.trim(),
+                bairro: document.getElementById('bairro').value.trim(),
+                endereco: document.getElementById('endereco').value.trim(),
+                telefone: document.getElementById('telefone').value.trim(),
+                material: document.getElementById('material').value,
+                quantidade: document.getElementById('quantidade').value.trim(),
+                horario: document.getElementById('horario').value || null
+            });
+
+        if (error) {
+            throw error;
+        }
+
+        form.style.display = 'none';
+        mensagem.classList.remove('oculto');
+    } catch (error) {
+        console.error('Falha ao enviar solicitação de coleta:', error);
+        mensagemErro.textContent = 'Não foi possível enviar a solicitação. Verifique a conexão e tente novamente.';
+        mensagemErro.classList.remove('oculto');
+    } finally {
+        botaoEnviar.disabled = false;
+    }
 });
 
 if ('serviceWorker' in navigator) {

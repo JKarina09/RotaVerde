@@ -79,14 +79,21 @@
 
     <section id="coleta" class="secao">
         <h2>🤝 Solicitar Coleta Voluntária</h2>
+        
         <form id="form-coleta">
-            <label>Seu nome:</label>
-            <input type="text" id="nome" required>
+            <label for="nome">Seu nome:</label>
+            <input type="text" id="nome" autocomplete="name" required>
 
-            <label>Seu bairro:</label>
+            <label for="bairro">Seu bairro:</label>
             <input type="text" id="bairro" required>
 
-            <label>Tipo de material:</label>
+            <label for="endereco">Endereço para coleta:</label>
+            <input type="text" id="endereco" autocomplete="street-address" placeholder="Rua, número e complemento" required>
+
+            <label for="telefone">Telefone para contato:</label>
+            <input type="tel" id="telefone" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" required>
+
+            <label for="material">Tipo de material:</label>
             <select id="material">
                 <option>Papel e Papelão</option>
                 <option>Plástico</option>
@@ -96,15 +103,21 @@
                 <option>Mistura de materiais</option>
             </select>
 
-            <label>Quantidade aproximada:</label>
+            <label for="quantidade">Quantidade aproximada:</label>
             <input type="text" id="quantidade" placeholder="Ex: 2 sacolas, 1 garrafa" required>
 
-            <label>Melhor horário para contato:</label>
+            <label for="horario">Melhor horário para contato:</label>
             <input type="time" id="horario">
+
+            <label class="consentimento">
+                <input type="checkbox" id="consentimento" required>
+                Concordo que meus dados sejam usados para organizar o contato sobre esta solicitação.
+            </label>
 
             <button type="submit" class="btn">Solicitar Coleta ✅</button>
         </form>
-        <div id="mensagem-sucesso" class="oculto">
+        <div id="mensagem-erro" class="oculto" role="alert"></div>
+        <div id="mensagem-sucesso" class="oculto" role="status">
             Solicitação enviada!
         </div>
     </section>
@@ -145,6 +158,8 @@
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
